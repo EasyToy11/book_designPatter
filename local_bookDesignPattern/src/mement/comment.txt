@@ -1,0 +1,21 @@
+Mementoを一言でいうと、「状態の保存」
+ゲームのセーブデータクラスを作る感じ。
+
+セーブデータクラス、セーブデータクラスを作るクラス、セーブデータを使うクラスに
+分けるのが肝。
+
+PlantUML:
+@startuml
+title 本のUML
+class Main
+
+package game{
+class Gamer
+class Memento
+}
+
+Gamer -down-> Memento:Creates
+Main -right-> Gamer:Requests   
+Main o- Memento
+
+@enduml
