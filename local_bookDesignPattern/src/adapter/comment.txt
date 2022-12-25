@@ -1,0 +1,66 @@
+Adapterは一言でいうと、「ひと手間加えて、再利用」
+
+既存クラスを修正することなく使うことがポイント。
+既存クラスをそのまま使うことで、バグの原因を限定しやすくなる。
+
+Adapterパターンでは継承と委譲の二つのやり方があるが、
+一般的には委譲を使った方が事故が少ない。
+継承ではスーパークラスの動作を正確に把握する必要がある。
+
+@startuml
+
+namespace extend{
+class Client
+interface Target{
+	targetMethod1()
+	targetMethod2()
+}
+
+
+class Adapter{
+	targetMethod1()
+	targetMethod2()
+}
+
+class Adaptee{
+	methodA
+	methodB
+	methodC
+}
+
+note "継承はinterfaceを使う" as N1
+Client --> Target:use
+Target <|.. Adapter:implement
+Adapter -> Adaptee:extend
+}
+
+namespace transfer{
+class Client
+abstract Target{
+	targetMethod1()
+	targetMethod2()
+}
+
+
+class Adapter{
+	targetMethod1()
+	targetMethod2()
+}
+
+class Adaptee{
+	methodA
+	methodB
+	methodC
+}
+
+note "委譲は\nabstract classを使う" as N1
+Client --> Target:use
+Target <|-- Adapter:extend
+Adapter o-> Adaptee:has
+
+}
+
+@enduml
+
+
+

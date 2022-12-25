@@ -2,6 +2,11 @@
 Iterator
 
 
+singleton
+enumを使ったsingletonがある。p66
+
+
+それぞれのパターンでの類似点をまとめる。
 
 
 

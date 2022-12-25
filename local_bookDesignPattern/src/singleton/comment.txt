@@ -1,0 +1,19 @@
+Singletonは一言でいうと、「一つのインスタンス」
+
+Singletonパターンを使って、一つのインスタンスだけが存在している状態にする。
+
+作り方～～～
+1.Singletonクラスのフィールドに、privateでstaticな自身のインスタンスを持ち、newする
+2.privateなコンストラクタを作る
+3.このままだと、外部クラスがアクセスできないので、publicで、1.を返すgetメソッドを作る
+
+クラス図を見たほうが早いかも
+
+@startuml
+skinparam classAttributeIconSize 0
+class Singleton{
+	- singleton
+	- Singleton()
+	+ getInstance()
+}
+@enduml
