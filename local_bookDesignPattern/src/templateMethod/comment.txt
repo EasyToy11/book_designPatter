@@ -1,0 +1,34 @@
+templateMethodは一言でいうと、「具体的な処理をサブクラスに任せる」
+
+スーパークラスにロジックが全部書いてあるため、残りの処理をサブクラスに任せる。
+見通しがよくなるだけではなく、ロジックを共通化することによって、
+バグの処理も楽になる。
+
+スーパークラス型の変数に、サブクラスのインスタンスの、どれを代入しても
+正しく動作するようにすることは、The Liskov Substitution Principle(LSP)と呼ばれる。
+
+
+@startuml
+Abstract AbstractDisplay{
+	open()
+	print()
+	close()
+	display()
+}
+class CharDisplay{
+	open()
+	print()
+	close()
+}
+class StringDisplay{
+	open()
+	print()
+	close()
+}
+
+
+AbstractDisplay <|-- CharDisplay 
+AbstractDisplay <|-- StringDisplay
+
+
+@enduml
