@@ -1,0 +1,50 @@
+Builderは一言でいうと、「複雑なインスタンスを組み立てる」
+
+ここでのインスタンスは、クラスをnewしたものという意味ではなく、
+「インスタンス＝実態=ひと固まりの処理で何かを作る」という意味。
+
+作り方～～～
+1.必要なメソッド群をBuilderクラスとして定義(interface,abstract)しておく
+2.Builderクラスを継承し、メソッド群の実装をする
+3.1.のメソッド群を組み合わせて、処理を作る（呼び出したら、処理が進んでいるようにする）
+4.mainで、2.を生成して、3.に設定する
+5.４．を呼び出して、処理を実行する
+
+料理に必要なものを書き出して(builder)
+それを細分化して書き出して(builder継承クラス)
+書き出した料理をやる時間をアラートにセットして(director)
+実際にアラートを鳴らして、料理する(main)
+みたいな
+
+依存性の注入：
+「ソースコードには書いていないけど、実際はこのインスタンスを使って
+(依存して)動作してくださいね」という意味を込めてインスタンスを渡すことを、
+依存性の注入という。
+Dependency Injectionといい、DIという略語で呼ばれることがある。
+
+@startuml
+class Client
+class Director{
+	builder
+	construct()
+}
+class Builder{
+	buildPart1
+	buildPart2
+	buildPart3
+}
+class ConcreteBuilder{
+	buildPart1
+	buildPart2
+	buildPart3
+}
+
+
+Client --> Director:Uses
+Director o--> Builder
+ConcreteBuilder --|> Builder
+Client --> ConcreteBuilder:Uses
+
+@enduml
+
+
