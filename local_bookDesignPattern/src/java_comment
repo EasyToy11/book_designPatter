@@ -17,7 +17,20 @@ singleton
 enumを使ったsingletonがある。p66
 
 
+factoryMethod
+javaではabstractなコンストラクタは作れない。p410
+エラーが出る。
 
+コンストラクタで製品に名前をつけるのではなく、名前を付けるためのメソッドが
+別途必要。
+
+AbstractFactory
+クラスやコンストラクタといったプログラムの要素を(コンパイラではなく)、
+プログラム自身が扱うことを、リフレクションと呼ぶ。
+
+下記は、fornameでクラスを動的に読み込み、getDeclaredConstructor()で、
+コンストラクタを得て、newInstance()でインスタンスを作る。
+factory = (Factory)Class.forName(classname).getDeclaredConstructor().newInstance();
 
 
 

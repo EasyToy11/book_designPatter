@@ -1,0 +1,67 @@
+factoryMethodは一言でいうと、「サブクラスにインスタンスの作成を任せる」
+
+templateMethodのインスタンスバージョンみたいな感じ。
+templateMethodではもっと一般的なロジックの定義するけど、
+factoryMthodではそのインスタンスに必要なロジックの定義化を行う。
+(また、factoryMethodの内部でtemplateMethodが用いられている）
+
+クラス（インスタンス）に共通の処理を持たせる場合や、
+共通のロジックはどれかというのが分かりやすくなったりするので、便利。
+
+また、今回のサンプルだと、Factory,Productとともに、抽象クラスになっているが、
+普通にクラスとして書いて、デフォルトの実装を用意しておくことが出来る。
+（この場合、Factoryで直接Productをnewするので、Productを抽象クラスにすることは出来ない）
+使い勝手は、普通にクラスとして書いて、必要なところをOverrideするのが便利そう）
+
+ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
+インスタンス作成のためのクラスメソッドをstatic Factory Methodと呼ぶことがある。
+今回のfactoryMethodパターンが用いられ、インスタンス作成で必要なものとか、
+共通ロジックがインスタンスに入っているかなどあるため、
+インスタンス生成で重要な役割を果たすことが多い。
+
+例：create,newInstance,getInstanceなど
+　　（メソッドの内部で色々処理して、newしてる)
+
+---------------------------------------------------------------
+factoryMethodで、作成するインスタンスに通番をつける時には
+具象クラスの方で作る。サンプルコード参照。
+
+---------------------------------------------------------------
+
+@startuml
+package "フレームワーク"{
+	class Creator{
+		create():templateMethod(共通ロジック)
+		factoryMethod()
+	}
+	class Product{
+		method1
+		method2
+		method3
+	}
+	
+	Creator -right-> Product:Creates
+}
+
+package "肉付け"{
+	class ConcreteCreator{
+		factoryMethod
+	}
+	
+	class ConcreteProduct{
+		method1
+		method2
+		method3
+	}
+	
+	ConcreteCreator -right-> ConcreteProduct:Creates
+}
+
+"フレームワーク" -[hidden]- "肉付け"
+
+Creator <|-- ConcreteCreator
+Product <|-- ConcreteProduct
+
+@enduml
+
+
